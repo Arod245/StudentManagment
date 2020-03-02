@@ -1,0 +1,71 @@
+﻿@model StudentMVC.Models.Student
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@if (User.IsInRole("teacher") || User.IsInRole("admin"))
+{
+    <h1>Edit</h1>
+
+    <h4>Student</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ID" />
+                @if (User.IsInRole("admin"))
+                {
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                }
+
+                @if (User.IsInRole("admin"))
+                {
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                }
+
+                @if (User.IsInRole("admin"))
+                {
+                    <div class="form-group">
+                        <label asp-for="Age" class="control-label"></label>
+                        <input asp-for="Age" class="form-control" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label asp-for="GPA" class="control-label"></label>
+                    <input asp-for="GPA" class="form-control" />
+                    <span asp-validation-for="GPA" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LetterGrade" class="control-label"></label>
+                    <input asp-for="LetterGrade" class="form-control" />
+                    <span asp-validation-for="LetterGrade" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
+else
+{
+    <h1 class="text-danger">Access Denied!</h1>
+    <p class="text text-info">You need to be a teacher or admin to edit this student.</p>
+    <a class ="btn btn-success"asp-action="Index">Back to List</a>
+}
+
